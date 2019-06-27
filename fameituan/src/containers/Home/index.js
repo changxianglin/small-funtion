@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { homeActions } from './store'
 
 class Home extends Component {
   render() {
@@ -10,6 +11,9 @@ class Home extends Component {
       </div>
     )
   }
+  componentDidMount() {
+    this.props.initalLoad()
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -18,4 +22,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Home)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initalLoad() {
+      dispatch(homeActions.getList())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

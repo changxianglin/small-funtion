@@ -1,3 +1,5 @@
+import { actionTypes } from './index'
+
 const initalState = {
   title: '首页',
   list: [
@@ -6,7 +8,17 @@ const initalState = {
 }
 
 const homeReducer = (state = initalState, action) => {
-  return state
+  switch(action.type) {
+    case actionTypes.CHANGE_LIST:
+      return {
+        ...state,
+        list: [
+          action.data
+        ]
+      }
+    default:
+      return state
+  }
 }
 
 export default homeReducer
